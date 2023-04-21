@@ -15,6 +15,13 @@ jobs:
     steps:
     - name: Checkout Commit
       uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    # https://github.com/actions/setup-node/issues/214#issuecomment-810829250
+    - name: Reconfigure git to use HTTP authentication
+      run: >
+        git config --global url."https://github.com/".insteadOf
+        ssh://git@github.com/
 
     - name: Parsing Package Info
       id: packageInfo
